@@ -11,6 +11,8 @@ class MyDeviceAdminReceiver : DeviceAdminReceiver() {
 
     override fun onEnabled(context: Context, intent: Intent) {
         super.onEnabled(context, intent)
+        FirewallManager::blockTikTokDomains
+
         showToast(context, "Administrateur de périphérique activé")
     }
 
@@ -39,7 +41,7 @@ class MyDeviceAdminReceiver : DeviceAdminReceiver() {
     }
 
     // Ajoutez cette méthode pour désactiver TikTok
-    fun disableTikTok(context: Context) {
+    private fun disableTikTok(context: Context) {
         try {
             val packageManager = context.packageManager
             packageManager.setApplicationEnabledSetting(
